@@ -47,15 +47,16 @@ class CaptchaSolver:
             logger.error(f"Error downloading captcha: {str(e)}")
             return None
     
-    def preprocess_image(self, image_bytes: bytes) -> Optional[np.ndarray]:
+    def preprocess_image(self, image_bytes: bytes) -> list:
         """
         Preprocess the captcha image to improve OCR accuracy.
+        Returns multiple processed versions for better success rate.
         
         Args:
             image_bytes: Raw image bytes
             
         Returns:
-            Processed image as numpy array or None if failed
+            List of processed images as numpy arrays
         """
         try:
             # Convert bytes to PIL Image
@@ -67,106 +68,143 @@ class CaptchaSolver:
             
             # Resize image if too small (OCR works better on larger images)
             width, height = pil_image.size
-            if width < 150 or height < 50:
-                scale_factor = max(150/width, 50/height, 2.0)
-                new_width = int(width * scale_factor)
-                new_height = int(height * scale_factor)
-                pil_image = pil_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
-                logger.info(f"Resized captcha from {width}x{height} to {new_width}x{new_height}")
+            scale_factor = max(200/width, 80/height, 3.0)  # Increased scaling
+            new_width = int(width * scale_factor)
+            new_height = int(height * scale_factor)
+            pil_image = pil_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            logger.info(f"Resized captcha from {width}x{height} to {new_width}x{new_height}")
             
-            # Enhance image quality
-            # Increase contrast
-            enhancer = ImageEnhance.Contrast(pil_image)
-            pil_image = enhancer.enhance(1.5)
+            processed_images = []
             
-            # Increase sharpness
-            enhancer = ImageEnhance.Sharpness(pil_image)
-            pil_image = enhancer.enhance(2.0)
+            # Version 1: Standard processing
+            enhanced_image = pil_image.copy()
+            enhancer = ImageEnhance.Contrast(enhanced_image)
+            enhanced_image = enhancer.enhance(1.8)
+            enhancer = ImageEnhance.Sharpness(enhanced_image)
+            enhanced_image = enhancer.enhance(2.5)
             
-            # Convert PIL to OpenCV format
-            opencv_image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
-            
-            # Convert to grayscale
+            opencv_image = cv2.cvtColor(np.array(enhanced_image), cv2.COLOR_RGB2BGR)
             gray = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2GRAY)
             
             # Apply noise reduction
             denoised = cv2.medianBlur(gray, 3)
             
-            # Apply threshold to create binary image
-            # Try adaptive threshold first
-            binary = cv2.adaptiveThreshold(denoised, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                                         cv2.THRESH_BINARY, 11, 2)
+            # Try different thresholding methods
+            _, binary1 = cv2.threshold(denoised, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+            processed_images.append(binary1)
             
-            # If adaptive threshold doesn't work well, try OTSU
-            _, otsu_binary = cv2.threshold(denoised, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+            # Version 2: Adaptive threshold
+            binary2 = cv2.adaptiveThreshold(denoised, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                          cv2.THRESH_BINARY, 11, 2)
+            processed_images.append(binary2)
             
-            # Morphological operations to clean up the image
+            # Version 3: Different contrast and brightness
+            enhanced_image2 = pil_image.copy()
+            enhancer = ImageEnhance.Contrast(enhanced_image2)
+            enhanced_image2 = enhancer.enhance(2.5)
+            enhancer = ImageEnhance.Brightness(enhanced_image2)
+            enhanced_image2 = enhancer.enhance(1.2)
+            
+            opencv_image2 = cv2.cvtColor(np.array(enhanced_image2), cv2.COLOR_RGB2BGR)
+            gray2 = cv2.cvtColor(opencv_image2, cv2.COLOR_BGR2GRAY)
+            denoised2 = cv2.medianBlur(gray2, 3)
+            _, binary3 = cv2.threshold(denoised2, 127, 255, cv2.THRESH_BINARY)
+            processed_images.append(binary3)
+            
+            # Version 4: Morphological operations
             kernel = np.ones((2,2), np.uint8)
-            cleaned = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
+            cleaned = cv2.morphologyEx(binary1, cv2.MORPH_CLOSE, kernel)
             cleaned = cv2.morphologyEx(cleaned, cv2.MORPH_OPEN, kernel)
+            processed_images.append(cleaned)
             
-            logger.info("Image preprocessing completed")
-            return cleaned
+            # Version 5: Inverted image (sometimes helps)
+            inverted = cv2.bitwise_not(binary1)
+            processed_images.append(inverted)
+            
+            logger.info(f"Generated {len(processed_images)} processed image versions")
+            return processed_images
             
         except Exception as e:
             logger.error(f"Error preprocessing image: {str(e)}")
-            return None
+            return []
     
-    def extract_text_ocr(self, processed_image: np.ndarray) -> Optional[str]:
+    def extract_text_ocr(self, processed_images: list) -> Optional[str]:
         """
-        Extract text from preprocessed image using OCR.
+        Extract text from multiple preprocessed images using OCR.
         
         Args:
-            processed_image: Preprocessed image as numpy array
+            processed_images: List of preprocessed images as numpy arrays
             
         Returns:
             Extracted text or None if failed
         """
         try:
-            # Convert back to PIL Image for pytesseract
-            pil_image = Image.fromarray(processed_image)
-            
             # Try different OCR configurations
             configs = [
                 r'--oem 3 --psm 8 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 r'--oem 3 --psm 7 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+                r'--oem 3 --psm 13 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 r'--oem 3 --psm 8',
                 r'--oem 3 --psm 7',
             ]
             
             best_result = ""
             best_confidence = 0
+            results_count = {}
             
-            for config in configs:
-                try:
-                    # Extract text
-                    text = pytesseract.image_to_string(pil_image, config=config).strip()
-                    
-                    # Get confidence
-                    data = pytesseract.image_to_data(pil_image, config=config, output_type=pytesseract.Output.DICT)
-                    confidences = [int(conf) for conf in data['conf'] if int(conf) > 0]
-                    avg_confidence = sum(confidences) / len(confidences) if confidences else 0
-                    
-                    # Clean up text
-                    cleaned_text = re.sub(r'[^A-Z0-9]', '', text.upper())
-                    
-                    logger.info(f"OCR result: '{cleaned_text}' (confidence: {avg_confidence:.1f}%)")
-                    
-                    if len(cleaned_text) >= 4 and avg_confidence > best_confidence:
-                        best_result = cleaned_text
-                        best_confidence = avg_confidence
+            # Try each processed image with each config
+            for img_idx, processed_image in enumerate(processed_images):
+                pil_image = Image.fromarray(processed_image)
+                
+                for config_idx, config in enumerate(configs):
+                    try:
+                        # Extract text
+                        text = pytesseract.image_to_string(pil_image, config=config).strip()
                         
-                except Exception as e:
-                    logger.warning(f"OCR config failed: {e}")
-                    continue
+                        # Get confidence
+                        data = pytesseract.image_to_data(pil_image, config=config, output_type=pytesseract.Output.DICT)
+                        confidences = [int(conf) for conf in data['conf'] if int(conf) > 0]
+                        avg_confidence = sum(confidences) / len(confidences) if confidences else 0
+                        
+                        # Clean up text
+                        cleaned_text = re.sub(r'[^A-Z0-9]', '', text.upper())
+                        
+                        if len(cleaned_text) >= 3:
+                            # Count occurrences of this result
+                            results_count[cleaned_text] = results_count.get(cleaned_text, 0) + 1
+                            
+                            logger.info(f"OCR result (img {img_idx}, cfg {config_idx}): '{cleaned_text}' (confidence: {avg_confidence:.1f}%)")
+                            
+                            # Track best result by confidence
+                            if avg_confidence > best_confidence:
+                                best_result = cleaned_text
+                                best_confidence = avg_confidence
+                                
+                    except Exception as e:
+                        continue
             
-            if best_result and len(best_result) >= 3:
-                logger.info(f"Best OCR result: '{best_result}' (confidence: {best_confidence:.1f}%)")
-                return best_result
-            else:
-                logger.warning("No reliable OCR result found")
-                return None
+            # If we have multiple results, prefer the most common one
+            if results_count:
+                most_common = max(results_count.items(), key=lambda x: x[1])
+                most_common_text, count = most_common
+                
+                # If a result appears multiple times and has reasonable length, prefer it
+                if count >= 2 and len(most_common_text) >= 3:
+                    logger.info(f"Using most common result: '{most_common_text}' (appeared {count} times)")
+                    return most_common_text
+                elif best_result and len(best_result) >= 3 and best_confidence > 10:
+                    logger.info(f"Using best confidence result: '{best_result}' (confidence: {best_confidence:.1f}%)")
+                    return best_result
+                elif most_common_text and len(most_common_text) >= 3:
+                    logger.info(f"Using most common result: '{most_common_text}' (appeared {count} times)")
+                    return most_common_text
+                elif best_result and len(best_result) >= 3:
+                    logger.info(f"Using best result (low confidence): '{best_result}' (confidence: {best_confidence:.1f}%)")
+                    return best_result
+            
+            logger.warning("No reliable OCR result found")
+            return None
                 
         except Exception as e:
             logger.error(f"Error in OCR extraction: {str(e)}")
@@ -203,13 +241,13 @@ class CaptchaSolver:
             if not image_bytes:
                 return None
             
-            # Preprocess image
-            processed_image = self.preprocess_image(image_bytes)
-            if processed_image is None:
+            # Preprocess image (now returns multiple versions)
+            processed_images = self.preprocess_image(image_bytes)
+            if not processed_images:
                 return None
             
             # Extract text using OCR
-            captcha_text = self.extract_text_ocr(processed_image)
+            captcha_text = self.extract_text_ocr(processed_images)
             
             if captcha_text:
                 logger.info(f"Successfully solved captcha: '{captcha_text}'")
@@ -255,7 +293,7 @@ class CaptchaSolver:
             logger.info(f"Captcha solving attempt {attempt + 1}/{max_attempts}")
             
             result = self.solve_captcha(session, base_url, captcha_image_path)
-            if result and len(result) >= 4:  # Reasonable captcha length
+            if result and len(result) >= 3:  # More permissive length requirement
                 return result
             
             # Small delay between attempts

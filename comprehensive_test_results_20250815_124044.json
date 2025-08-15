@@ -1,0 +1,644 @@
+{
+  "timestamp": "2025-08-15T12:40:44.124514",
+  "test_type": "comprehensive_all_cases",
+  "total_cases": 24,
+  "successful_cases": 24,
+  "failed_cases": 0,
+  "success_rate": 100.0,
+  "average_duration": 11.517922123273214,
+  "total_duration": 276.43013095855713,
+  "error_breakdown": {
+    "captcha_error": 0,
+    "connection_error": 0,
+    "other_error": 0,
+    "exception": 0,
+    "unknown": 0
+  },
+  "assessment": "excellent",
+  "results": [
+    {
+      "case_number": 1,
+      "plate": "FPY2137",
+      "vin": "3N8CP5HD6HL478150",
+      "status": "success",
+      "duration": 12.759620428085327,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FPY2137",
+          "processed_vin": "3N8CP5HD6HL478150"
+        }
+      }
+    },
+    {
+      "case_number": 2,
+      "plate": "C1721527327",
+      "vin": "19XFB268XCE602865",
+      "status": "success",
+      "duration": 11.31066632270813,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "C1721527327",
+          "processed_vin": "19XFB268XCE602865"
+        }
+      }
+    },
+    {
+      "case_number": 3,
+      "plate": "US033",
+      "vin": "3GNCJ7CE9GL15",
+      "status": "success",
+      "duration": 11.459191799163818,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "US033",
+          "processed_vin": "3GNCJ7CE9GL15"
+        }
+      }
+    },
+    {
+      "case_number": 4,
+      "plate": "FNK134B",
+      "vin": "3GNCJ7CE9FL184819",
+      "status": "success",
+      "duration": 11.656097888946533,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FNK134B",
+          "processed_vin": "3GNCJ7CE9FL184819"
+        }
+      }
+    },
+    {
+      "case_number": 5,
+      "plate": "FDE454D",
+      "vin": "MRHGM6664HP053643",
+      "status": "success",
+      "duration": 11.748021364212036,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FDE454D",
+          "processed_vin": "MRHGM6664HP053643"
+        }
+      }
+    },
+    {
+      "case_number": 6,
+      "plate": "19E924",
+      "vin": "LSJA24390RN030310",
+      "status": "success",
+      "duration": 11.362613677978516,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "19E924",
+          "processed_vin": "LSJA24390RN030310"
+        }
+      }
+    },
+    {
+      "case_number": 7,
+      "plate": "EWX867D",
+      "vin": "3GNCJ7CE9FL184819",
+      "status": "success",
+      "duration": 11.047983169555664,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EWX867D",
+          "processed_vin": "3GNCJ7CE9FL184819"
+        }
+      }
+    },
+    {
+      "case_number": 8,
+      "plate": "EWK531D",
+      "vin": "1FATP8FF3G5263458",
+      "status": "success",
+      "duration": 11.16261339187622,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EWK531D",
+          "processed_vin": "1FATP8FF3G5263458"
+        }
+      }
+    },
+    {
+      "case_number": 9,
+      "plate": "FDH923C",
+      "vin": "ML3AB56J7JH004905",
+      "status": "success",
+      "duration": 11.636059999465942,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FDH923C",
+          "processed_vin": "ML3AB56J7JH004905"
+        }
+      }
+    },
+    {
+      "case_number": 10,
+      "plate": "FAZ567D",
+      "vin": "MA6CA6AD5HT028126",
+      "status": "success",
+      "duration": 11.400373220443726,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FAZ567D",
+          "processed_vin": "MA6CA6AD5HT028126"
+        }
+      }
+    },
+    {
+      "case_number": 11,
+      "plate": "EXU079D",
+      "vin": "MEX5G2604KT033581",
+      "status": "success",
+      "duration": 11.298559188842773,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EXU079D",
+          "processed_vin": "MEX5G2604KT033581"
+        }
+      }
+    },
+    {
+      "case_number": 12,
+      "plate": "FEH994C",
+      "vin": "KL8MD6A01EC011238",
+      "status": "success",
+      "duration": 12.88247537612915,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FEH994C",
+          "processed_vin": "KL8MD6A01EC011238"
+        }
+      }
+    },
+    {
+      "case_number": 13,
+      "plate": "EYZ090D",
+      "vin": "3N1CK3CD6KL208433",
+      "status": "success",
+      "duration": 14.292856931686401,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EYZ090D",
+          "processed_vin": "3N1CK3CD6KL208433"
+        }
+      }
+    },
+    {
+      "case_number": 14,
+      "plate": "EZL192D",
+      "vin": "MAJFPIMDEGA124227",
+      "status": "success",
+      "duration": 11.280164241790771,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EZL192D",
+          "processed_vin": "MAJFPIMDEGA124227"
+        }
+      }
+    },
+    {
+      "case_number": 15,
+      "plate": "FCT380C",
+      "vin": "JN8BT27T8MW126609",
+      "status": "success",
+      "duration": 11.212281227111816,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FCT380C",
+          "processed_vin": "JN8BT27T8MW126609"
+        }
+      }
+    },
+    {
+      "case_number": 16,
+      "plate": "FKY171B",
+      "vin": "3G1TA5AF1DL163526",
+      "status": "success",
+      "duration": 11.077985525131226,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FKY171B",
+          "processed_vin": "3G1TA5AF1DL163526"
+        }
+      }
+    },
+    {
+      "case_number": 17,
+      "plate": "FBU219B",
+      "vin": "3N1CK3CD9JL246205",
+      "status": "success",
+      "duration": 10.928784132003784,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FBU219B",
+          "processed_vin": "3N1CK3CD9JL246205"
+        }
+      }
+    },
+    {
+      "case_number": 18,
+      "plate": "EWX819B",
+      "vin": "MA6CB5CDXLT035912",
+      "status": "success",
+      "duration": 11.175958395004272,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EWX819B",
+          "processed_vin": "MA6CB5CDXLT035912"
+        }
+      }
+    },
+    {
+      "case_number": 19,
+      "plate": "EVA834B",
+      "vin": "3VW1K1AJ5HM277759",
+      "status": "success",
+      "duration": 11.178068161010742,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EVA834B",
+          "processed_vin": "3VW1K1AJ5HM277759"
+        }
+      }
+    },
+    {
+      "case_number": 20,
+      "plate": "FJF553A",
+      "vin": "3N1CK3CD4FL240089",
+      "status": "success",
+      "duration": 10.885682821273804,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FJF553A",
+          "processed_vin": "3N1CK3CD4FL240089"
+        }
+      }
+    },
+    {
+      "case_number": 21,
+      "plate": "FAV455B",
+      "vin": "3G1TA5AFXEL219027",
+      "status": "success",
+      "duration": 10.920162677764893,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FAV455B",
+          "processed_vin": "3G1TA5AFXEL219027"
+        }
+      }
+    },
+    {
+      "case_number": 22,
+      "plate": "EVK879A",
+      "vin": "9FBHS1FF3LM545124",
+      "status": "success",
+      "duration": 11.248026847839355,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "EVK879A",
+          "processed_vin": "9FBHS1FF3LM545124"
+        }
+      }
+    },
+    {
+      "case_number": 23,
+      "plate": "FPV2722",
+      "vin": "3N1AB7AD7GL606775",
+      "status": "success",
+      "duration": 11.509729862213135,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FPV2722",
+          "processed_vin": "3N1AB7AD7GL606775"
+        }
+      }
+    },
+    {
+      "case_number": 24,
+      "plate": "FCS206B",
+      "vin": "3N1CN7AD2JL855041",
+      "status": "success",
+      "duration": 10.996154308319092,
+      "error": null,
+      "result": {
+        "codigo": "ok",
+        "info": [],
+        "vehicle_info": {
+          "vin": "",
+          "make": "",
+          "model": "2019",
+          "description": "",
+          "year": "2019",
+          "color": ""
+        },
+        "_metadata": {
+          "service_version": "1.0.0",
+          "scraper_used": "PagaFacilScraper",
+          "processed_plate": "FCS206B",
+          "processed_vin": "3N1CN7AD2JL855041"
+        }
+      }
+    }
+  ]
+}

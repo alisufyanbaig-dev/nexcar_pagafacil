@@ -15,28 +15,34 @@ logger = logging.getLogger(__name__)
 class PagaFacilScraper:
     """Scraper for Paga Fácil vehicle tax website."""
     
-    def __init__(self, proxy_host: str, proxy_port: int, proxy_username: str, proxy_password: str):
+    def __init__(self, proxy_host: str = None, proxy_port: int = None, proxy_username: str = None, proxy_password: str = None):
         """
-        Initialize the scraper with proxy configuration.
+        Initialize the scraper with optional proxy configuration.
         
         Args:
-            proxy_host: Proxy server hostname
-            proxy_port: Proxy server port
-            proxy_username: Proxy authentication username
-            proxy_password: Proxy authentication password
+            proxy_host: Proxy server hostname (optional)
+            proxy_port: Proxy server port (optional)
+            proxy_username: Proxy authentication username (optional)
+            proxy_password: Proxy authentication password (optional)
         """
         self.base_url = "https://www.pagafacil.gob.mx/pagafacilv2/epago/cv/"
         self.form_url = "control_vehicular_25.php"
         
-        # Configure proxy
-        self.proxies = {
-            'http': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}',
-            'https': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
-        }
-        
         # Configure session
         self.session = requests.Session()
-        self.session.proxies = self.proxies
+        
+        # Configure proxy if provided
+        if proxy_host and proxy_port and proxy_username and proxy_password:
+            logger.info(f"Using proxy: {proxy_host}:{proxy_port}")
+            self.proxies = {
+                'http': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}',
+                'https': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
+            }
+            self.session.proxies = self.proxies
+        else:
+            logger.info("No proxy configured, using direct connection")
+            self.proxies = None
+        
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         })

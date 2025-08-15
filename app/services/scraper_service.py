@@ -15,19 +15,19 @@ class ScraperService:
     business logic, validation, and error handling.
     """
     
-    def __init__(self, proxy_host, proxy_port, proxy_username, proxy_password,
-                 base_url, form_url, request_timeout=30, max_retry_attempts=3,
+    def __init__(self, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None,
+                 base_url=None, form_url=None, request_timeout=30, max_retry_attempts=3,
                  captcha_max_attempts=2):
         """
         Initialize the scraper service.
         
         Args:
-            proxy_host: Proxy server hostname
-            proxy_port: Proxy server port
-            proxy_username: Proxy authentication username
-            proxy_password: Proxy authentication password
-            base_url: Base URL for the target website
-            form_url: Form URL for vehicle queries
+            proxy_host: Proxy server hostname (optional)
+            proxy_port: Proxy server port (optional)
+            proxy_username: Proxy authentication username (optional)
+            proxy_password: Proxy authentication password (optional)
+            base_url: Base URL for the target website (optional)
+            form_url: Form URL for vehicle queries (optional)
             request_timeout: HTTP request timeout in seconds
             max_retry_attempts: Maximum retry attempts for failed requests
             captcha_max_attempts: Maximum captcha solving attempts
